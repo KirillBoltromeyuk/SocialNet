@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Edit post</title>
+</head>
+<body th:each="element:${post}">
+<div >
+    <form method="post">
+        <textarea  name="text" placeholder="Enter text"  th:text="${element.text}"/><br>
+        <button type="submit" >Update</button>
+    </form>
+    <form th:action="'/user/deletePost/'+${element.id}" method="post">
+        <button  type="submit">Delete post</button>
+    </form>
+</div>
+</body>
+</html>

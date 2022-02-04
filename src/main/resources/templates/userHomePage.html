@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title th:each="element:${user}" th:text="${element.firstName}"></title>
+</head>
+<body>
+<div th:each="element:${user}">
+    <p th:text="${element.firstName}"></p>
+    <p th:text="${element.lastName}"></p>
+</div>
+<form action="/user/addPost" method="get">
+    <button type="submit">Add new Post</button>
+</form>
+<div th:each="element:${posts}">
+    <p th:text="${element.text}"></p>
+    <a th:href="'user/editPost/' +${element.id}">Edit</a>
+</div>
+
+<a href="/allUsers">All Users</a>
+<form action="/auth/logout" method="post">
+    <button type="submit">Logout</button>
+</form>
+
+</body>
+</html>

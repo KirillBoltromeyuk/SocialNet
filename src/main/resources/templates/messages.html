@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Messages</title>
+</head>
+<body >
+messages
+
+<div th:each="element:${messages}">
+    <p th:text="${element.text}"></p>
+    <p th:text="${element.authorUsername}"></p>
+    <br/>
+</div>
+<div th:each="element:${destinationUsername}">
+    <form  method="post" th:action="'/user/message/'+${element}">
+        <h2>New message</h2>
+        <a>
+            <textarea name="text" placeholder="Enter text"></textarea><br>
+        </a>
+        <button type="submit">Send message</button>
+    </form>
+</div>
+
+</body>
+</html>
