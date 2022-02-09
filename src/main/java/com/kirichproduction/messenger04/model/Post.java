@@ -13,6 +13,25 @@ public class Post {
     private String text;
     @Column(name = "author_username")
     private String authorUsername;
+    @Column(name = "author_id")
+    private Long authorId;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "author_id", referencedColumnName = "id")
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public Long getAuthorId() {
+        return authorId;
+    }
+
+    public void setAuthorId(Long authorId) {
+        this.authorId = authorId;
+    }
+
 
     public Long getId() {
         return id;

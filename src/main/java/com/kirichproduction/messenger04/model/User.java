@@ -1,10 +1,14 @@
 package com.kirichproduction.messenger04.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -47,6 +51,20 @@ public class User {
 
     @Transient
     private boolean passwordCheck = true;
+
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "authorId")
+    private List<Post> posts;
+
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
+    }
 
     public Long getId() {
         return id;

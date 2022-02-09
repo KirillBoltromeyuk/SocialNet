@@ -12,9 +12,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.util.Date;
 
 @Controller
 public class RegistrationController {
