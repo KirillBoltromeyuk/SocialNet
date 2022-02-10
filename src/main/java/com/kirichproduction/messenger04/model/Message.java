@@ -11,10 +11,26 @@ public class Message {
     private Long id;
     @Column(name = "text")
     private String text;
-    @Column(name = "author_username")
-    private String authorUsername;
-    @Column(name = "destination_username")
-    private String destinationUsername;
+    @Column(name = "author_id")
+    private Long authorId;
+    @Column(name = "destination_id")
+    private Long destinationId;
+
+    public Long getAuthorId() {
+        return authorId;
+    }
+
+    public void setAuthorId(Long authorId) {
+        this.authorId = authorId;
+    }
+
+    public Long getDestinationId() {
+        return destinationId;
+    }
+
+    public void setDestinationId(Long destinationId) {
+        this.destinationId = destinationId;
+    }
 
     public Long getId() {
         return id;
@@ -32,28 +48,24 @@ public class Message {
         this.text = text;
     }
 
-    public String getAuthorUsername() {
-        return authorUsername;
-    }
-
-    public void setAuthorUsername(String authorUsername) {
-        this.authorUsername = authorUsername;
-    }
-
-    public String getDestinationUsername() {
-        return destinationUsername;
-    }
-
-    public void setDestinationUsername(String destinationUsername) {
-        this.destinationUsername = destinationUsername;
-    }
-
     public Message() {
     }
 
-    public Message(String text, String authorUsername, String destinationUsername) {
+    public Message(String text, Long authorId, Long destinationId) {
         this.text = text;
-        this.authorUsername = authorUsername;
-        this.destinationUsername = destinationUsername;
+        this.authorId = authorId;
+        this.destinationId = destinationId;
+    }
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "author_id", referencedColumnName = "id", insertable=false, updatable=false)
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

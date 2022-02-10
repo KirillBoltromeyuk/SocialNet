@@ -11,27 +11,15 @@ public class Post {
     private Long id;
     @Column(name = "text")
     private String text;
-    @Column(name = "author_username")
-    private String authorUsername;
     @Column(name = "author_id")
     private Long authorId;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "author_id", referencedColumnName = "id")
-    private User user;
 
-    public User getUser() {
-        return user;
-    }
+
 
     public Long getAuthorId() {
         return authorId;
     }
-
-    public void setAuthorId(Long authorId) {
-        this.authorId = authorId;
-    }
-
 
     public Long getId() {
         return id;
@@ -49,20 +37,25 @@ public class Post {
         this.text = text;
     }
 
-    public String getAuthorUsername() {
-        return authorUsername;
-    }
 
-    public void setAuthorUsername(String authorUsername) {
-        this.authorUsername = authorUsername;
-    }
-
-
-    public Post(String text, String authorUsername) {
+    public Post(String text, Long authorId) {
         this.text = text;
-        this.authorUsername = authorUsername;
+        this.authorId = authorId;
     }
 
     public Post() {
+    }
+
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "author_id", referencedColumnName = "id", insertable=false, updatable=false)
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

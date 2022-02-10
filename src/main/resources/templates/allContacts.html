@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contacts</title>
+</head>
+<body>
+Contacts
+<div th:each="element:${messages}">
+    <form th:action="'/user/messages/'+${element.destinationId}" method="get">
+        <button th:text="${element.getUser().firstName}+ ' ' + ${element.getUser().lastName}+': '" type="submit">Send message</button>
+    </form>
+    <br/>
+</div>
+
+</body>
+</html>

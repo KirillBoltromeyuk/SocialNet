@@ -13,7 +13,7 @@
         <p th:text="${element.text}"></p>
     </div>
     <div th:each="element:${user}">
-        <form th:action="'/user/message/'+${element.email}" method="get">
+        <form th:action="'/user/messages/'+${element.id}" method="get">
             <button type="submit">Send message</button>
         </form>
     </div>
