@@ -13,8 +13,8 @@ public class Message {
     private String text;
     @Column(name = "author_id")
     private Long authorId;
-    @Column(name = "destination_id")
-    private Long destinationId;
+    @Column(name = "chat_id")
+    private Long chatId;
 
     public Long getAuthorId() {
         return authorId;
@@ -22,14 +22,6 @@ public class Message {
 
     public void setAuthorId(Long authorId) {
         this.authorId = authorId;
-    }
-
-    public Long getDestinationId() {
-        return destinationId;
-    }
-
-    public void setDestinationId(Long destinationId) {
-        this.destinationId = destinationId;
     }
 
     public Long getId() {
@@ -48,13 +40,21 @@ public class Message {
         this.text = text;
     }
 
+    public Long getChatId() {
+        return chatId;
+    }
+
+    public void setChatId(Long chatId) {
+        this.chatId = chatId;
+    }
+
     public Message() {
     }
 
-    public Message(String text, Long authorId, Long destinationId) {
+    public Message(String text, Long authorId, Long chatId) {
         this.text = text;
         this.authorId = authorId;
-        this.destinationId = destinationId;
+        this.chatId = chatId;
     }
 
     @ManyToOne(optional = false)
@@ -67,5 +67,13 @@ public class Message {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "chat_id", referencedColumnName = "id", insertable=false, updatable=false)
+    private Chat chat;
+
+    public Chat getChat() {
+        return chat;
     }
 }

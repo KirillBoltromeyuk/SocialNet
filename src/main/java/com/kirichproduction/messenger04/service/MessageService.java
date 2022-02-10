@@ -4,7 +4,6 @@ import com.kirichproduction.messenger04.model.Message;
 import com.kirichproduction.messenger04.repository.MessageRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
 @Service
 public class MessageService {
@@ -16,20 +15,15 @@ public class MessageService {
         this.userService = userService;
     }
 
-    public Iterable<Message> showMessages (Long destinationId){
-    Iterable<Message> messages = messageRepository.findAllByAuthorIdAndDestinationIdOrAuthorIdAndDestinationIdOrderById(
-            userService.authUserId(), destinationId, destinationId, userService.authUserId());
-    return messages;
-    }
 
-    public void sendMessage (String text, Long destinationId){
-        Message message = new Message(text, userService.authUserId(), destinationId);
+    public void sendMessage (String text, Long chatId){
+        Message message = new Message(text, userService.authUserId(), chatId);
         messageRepository.save(message);
     }
 
-    public List<Message> allContacts(){
-        List<Message> messages = messageRepository.findDistinctByAuthorIdOrderByDestinationId(userService.authUserId());
 
+    public Iterable<Message> messagesByChatId(Long id){
+        Iterable<Message> messages = messageRepository.findAllByChatId(id);
         return messages;
     }
 }

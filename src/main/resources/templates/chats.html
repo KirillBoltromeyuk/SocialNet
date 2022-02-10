@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Chats</title>
+</head>
+<body>
+Chats
+
+<div th:each="element:${chats}">
+    <a th:href="'chats/'+${element.id}"  th:text="${element.chatName}"></a>
+</div>
+
+</body>
+</html>
