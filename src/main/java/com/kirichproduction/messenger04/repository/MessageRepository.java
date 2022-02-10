@@ -6,4 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface MessageRepository extends JpaRepository<Message, Long> {
 
     Iterable<Message> findAllByChatId(Long chatId);
+    int countAllByAuthorIdAndChatIdAndIsRead(Long authorId,Long chatId, boolean isRead);
 }

@@ -15,6 +15,16 @@ public class Message {
     private Long authorId;
     @Column(name = "chat_id")
     private Long chatId;
+    @Column(name = "is_read")
+    private boolean isRead;
+
+    public boolean isRead() {
+        return isRead;
+    }
+
+    public void setRead(boolean read) {
+        isRead = read;
+    }
 
     public Long getAuthorId() {
         return authorId;
@@ -51,10 +61,11 @@ public class Message {
     public Message() {
     }
 
-    public Message(String text, Long authorId, Long chatId) {
+    public Message(String text, Long authorId, Long chatId, boolean isRead) {
         this.text = text;
         this.authorId = authorId;
         this.chatId = chatId;
+        this.setRead(isRead);
     }
 
     @ManyToOne(optional = false)

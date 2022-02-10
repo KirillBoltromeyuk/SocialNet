@@ -24,10 +24,14 @@ public class ChatService {
         Iterator<Chat> iterator = chats.iterator();
         while (iterator.hasNext()){
             Chat chat = iterator.next();
-            if(userService.authUserId().equals(chat.getUser1Id())) chat.setChatName(userService.userById(chat.getUser2Id()).get().getFirstName()
-                                                                                    + " " + userService.userById(chat.getUser2Id()).get().getLastName());
-            else chat.setChatName(userService.userById(chat.getUser1Id()).get().getFirstName()
+            if(userService.authUserId().equals(chat.getUser1Id())) {
+                chat.setChatName(userService.userById(chat.getUser2Id()).get().getFirstName()
+                        + " " + userService.userById(chat.getUser2Id()).get().getLastName());
+                chat.setNotReadMessagesCount(messageService.notReadMessagesCountFromUserIdFromChatId(chat.getUser2Id(), chat.getId()));
+            }else {chat.setChatName(userService.userById(chat.getUser1Id()).get().getFirstName()
                                     + " " + userService.userById(chat.getUser1Id()).get().getLastName());
+                chat.setNotReadMessagesCount(messageService.notReadMessagesCountFromUserIdFromChatId(chat.getUser1Id(), chat.getId()));
+            }
         }
         return chats;
     }

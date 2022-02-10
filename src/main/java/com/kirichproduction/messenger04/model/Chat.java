@@ -16,6 +16,16 @@ public class Chat {
     private Long user2Id;
     @Transient
     private String chatName;
+    @Transient
+    private int notReadMessagesCount;
+
+    public int getNotReadMessagesCount() {
+        return notReadMessagesCount;
+    }
+
+    public void setNotReadMessagesCount(int notReadMessagesCount) {
+        this.notReadMessagesCount = notReadMessagesCount;
+    }
 
     public String getChatName() {
         return chatName;

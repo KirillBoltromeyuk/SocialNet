@@ -11,6 +11,7 @@
     <h2>Chats</h2>
     <div th:each="element:${chats}" class="alert alert-info mt-2">
         <a th:href="'chats/'+${element.id}"  th:text="${element.chatName}"></a>
+        <a th:text="${element.getNotReadMessagesCount()+' new messages'}" ></a>
     </div>
 
 </div>
