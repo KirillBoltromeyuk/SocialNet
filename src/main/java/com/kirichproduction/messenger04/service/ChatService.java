@@ -2,11 +2,8 @@ package com.kirichproduction.messenger04.service;
 
 import com.kirichproduction.messenger04.model.Chat;
 import com.kirichproduction.messenger04.model.Message;
-import com.kirichproduction.messenger04.model.User;
 import com.kirichproduction.messenger04.repository.ChatRepository;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Optional;
 
@@ -60,5 +57,13 @@ public class ChatService {
             return chatRepository.findByUser1IdAndUser2Id(userService.authUserId(), id).get().getId();
         }
 
+    }
+    public String getChatNameWithChatId(Long id){
+        Optional<Chat> chat = chatRepository.findById(id);
+        if(userService.authUserId().equals(chat.get().getUser1Id())) chat.get().setChatName(userService.userById(chat.get().getUser2Id()).get().getFirstName()
+                + " " + userService.userById(chat.get().getUser2Id()).get().getLastName());
+        else chat.get().setChatName(userService.userById(chat.get().getUser1Id()).get().getFirstName()
+                + " " + userService.userById(chat.get().getUser1Id()).get().getLastName());
+        return chat.get().getChatName();
     }
 }

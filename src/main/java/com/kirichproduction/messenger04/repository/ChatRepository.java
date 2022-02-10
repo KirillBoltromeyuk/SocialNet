@@ -2,7 +2,6 @@ package com.kirichproduction.messenger04.repository;
 
 import com.kirichproduction.messenger04.model.Chat;
 import org.springframework.data.jpa.repository.JpaRepository;
-
 import java.util.Optional;
 
 public interface ChatRepository extends JpaRepository<Chat, Long> {

@@ -1,6 +1,7 @@
 package com.kirichproduction.messenger04.controller;
 
 import com.kirichproduction.messenger04.service.ChatService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/user/chats")
+@PreAuthorize("hasAuthority('users:read')")
 public class ChatController {
     private final ChatService chatService;
 
@@ -26,6 +28,7 @@ public class ChatController {
         if (chatService.userPresentInChat(id)) {
             model.addAttribute("messages", chatService.getMessagesFromChatId(id));
             model.addAttribute("chatId", id);
+            model.addAttribute("chatName", chatService.getChatNameWithChatId(id));
             return "chat";
         }else return "redirect:/user/chats";
     }

@@ -4,7 +4,6 @@ import com.kirichproduction.messenger04.model.User;
 import com.kirichproduction.messenger04.repository.UserRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -30,7 +29,8 @@ public class UserService {
     }
 
     public Iterable<User> findAllUsers(){
-        Iterable<User> allUsers = userRepository.findAll();
+        Iterable<User> allUsers;
+        allUsers = userRepository.findAll();
         return allUsers;
     }
 

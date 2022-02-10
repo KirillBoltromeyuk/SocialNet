@@ -30,6 +30,7 @@ public class PostController {
     }
 
     @GetMapping("/editPost/{id}")
+    @PreAuthorize("hasAuthority('users:read')")
     public String postEdit(@PathVariable(value = "id") long id, Model model) {
         if (postService.thisAuthUsersPost(id)) {
             model.addAttribute("post", postService.postOptional(id));
@@ -38,6 +39,7 @@ public class PostController {
     }
 
     @PostMapping("/editPost/{id}")
+    @PreAuthorize("hasAuthority('users:read')")
     public String postEditUpdate(@PathVariable(value = "id") long id,
                                  @RequestParam String text) {
         if (postService.thisAuthUsersPost(id)) {
@@ -47,6 +49,7 @@ public class PostController {
     }
 
     @PostMapping("/deletePost/{id}")
+    @PreAuthorize("hasAuthority('users:read')")
     public String PostDelete(@PathVariable(value = "id") long id) {
         if (postService.thisAuthUsersPost(id)) {
             postService.postDelete(id);

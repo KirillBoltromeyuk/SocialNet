@@ -39,6 +39,7 @@ public class UserController {
     }
 
     @GetMapping("/allUsers")
+    @PreAuthorize("hasAuthority('users:read')")
     public String allUsers(Model model) {
         model.addAttribute("users", userService.findAllUsers());
         return "allUsers";

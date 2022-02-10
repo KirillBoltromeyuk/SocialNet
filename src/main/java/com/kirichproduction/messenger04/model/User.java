@@ -1,5 +1,7 @@
 package com.kirichproduction.messenger04.model;
 
+import org.hibernate.validator.constraints.UniqueElements;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -30,7 +32,7 @@ public class User {
     private String lastName;
 
     @NotEmpty(message = "Password should not de empty")
-    @Size(min = 6, max = 100, message = "Password should be between 2 and 100 characters")
+    @Size(min = 6, max = 100, message = "Password should be between 6 and 100 characters")
     @Column(name = "password")
     private String password;
 

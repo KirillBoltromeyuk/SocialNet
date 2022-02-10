@@ -6,6 +6,7 @@ import com.kirichproduction.messenger04.model.User;
 import com.kirichproduction.messenger04.repository.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -23,13 +24,13 @@ public class RegistrationController {
 
 
     @GetMapping("/registration")
-    public String registrationPage(@ModelAttribute("user") User user) {
+    public String registrationPage(@ModelAttribute("user") User user, Model model) {
         return "registrationPage";
     }
 
     @PostMapping("/registration")
     public String addUser(@ModelAttribute("user") @Valid User user,
-                          BindingResult bindingResult) {
+                          BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors())
             return "registrationPage";
         if (user.getPassword().equals(user.getPasswordConfirm())) {
@@ -38,7 +39,7 @@ public class RegistrationController {
             userRepository.save(newUser);
             return "redirect:/login";
         } else {
-            user.setPasswordCheck(false);
+            model.addAttribute("passwordError","Password not confirm!");
             return "registrationPage";
         }
 
