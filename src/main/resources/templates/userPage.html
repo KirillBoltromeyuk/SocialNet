@@ -10,12 +10,15 @@
 <div class="container" mt-5 mb-5>
     <div th:each="element:${user}">
         <h2 th:text="${element.firstName}+' '+${element.lastName}"></h2>
+        <img th:src="${element.imagePath}" width="400" alt="No image"/>
     </div>
+    <br/>
     <div th:each="element:${user}">
         <form th:action="'/user/chats/byUser/'+${element.id}" method="get">
             <button type="submit">Send message</button>
         </form>
     </div>
+    <br/>
     <div th:each="element:${posts}" class="alert alert-info mt-2">
         <p th:text="${element.text}"></p>
     </div>

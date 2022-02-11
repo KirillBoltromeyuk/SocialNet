@@ -4,15 +4,20 @@ import com.kirichproduction.messenger04.model.Role;
 import com.kirichproduction.messenger04.model.Status;
 import com.kirichproduction.messenger04.model.User;
 import com.kirichproduction.messenger04.repository.UserRepository;
+import com.kirichproduction.messenger04.service.FileUploadUtil;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+
 
 @Controller
 public class RegistrationController {
@@ -24,7 +29,7 @@ public class RegistrationController {
 
 
     @GetMapping("/registration")
-    public String registrationPage(@ModelAttribute("user") User user, Model model) {
+    public String registrationPage(@ModelAttribute("user") User user) {
         return "registrationPage";
     }
 

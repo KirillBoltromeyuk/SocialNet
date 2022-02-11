@@ -44,6 +44,9 @@ public class User {
     @Column(name = "status")
     private Status status;
 
+    @Column(name = "image_id")
+    private Long imageId;
+
     @Transient
     private String passwordConfirm;
 
@@ -123,6 +126,29 @@ public class User {
         this.passwordCheck = passwordCheck;
     }
 
+    public Long getImageId() {
+        return imageId;
+    }
+
+    public void setImageId(Long imageId) {
+        this.imageId = imageId;
+    }
+
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
+    }
+
+    @Transient
+    public String getImagePath() {
+        if (imageId == null) return null;
+
+        return "/images/"+ image.getImageName();
+    }
+
     public User() {
     }
 
@@ -135,6 +161,9 @@ public class User {
         this.status = status;
     }
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="image_id", referencedColumnName = "id", insertable=false, updatable=false)
+    private Image image;
 
     @OneToMany( mappedBy = "user")
     private Collection<Post> posts;

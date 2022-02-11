@@ -22,6 +22,7 @@ public class UserService {
         return res;
     }
 
+
     public Long authUserId (){
         org.springframework.security.core.userdetails.User authUser = (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Optional<User> user = userRepository.findByEmail(authUser.getUsername());
@@ -42,5 +43,13 @@ public class UserService {
     public Optional<User> userById(Long id){
         Optional<User> userById = userRepository.findById(id);
         return userById;
+    }
+
+    public void updateUser(String firstName, String lastName, Long imageId) {
+        User updatedUser = userRepository.findById(authUserId()).orElseThrow();
+        updatedUser.setFirstName(firstName);
+        updatedUser.setLastName(lastName);
+        updatedUser.setImageId(imageId);
+        userRepository.save(updatedUser);
     }
 }
